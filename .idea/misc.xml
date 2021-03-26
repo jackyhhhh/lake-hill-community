@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/lh-zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/lh-eureka-server-01/pom.xml" />
+        <option value="$PROJECT_DIR$/lh-open-user/pom.xml" />
+        <option value="$PROJECT_DIR$/lh-open-msg/pom.xml" />
+        <option value="$PROJECT_DIR$/lh-zuul-server/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

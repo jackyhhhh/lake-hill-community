@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lh-eureka-server-01/lh-eureka-server-01.iml" filepath="$PROJECT_DIR$/lh-eureka-server-01/lh-eureka-server-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lh-open-msg/lh-open-msg.iml" filepath="$PROJECT_DIR$/lh-open-msg/lh-open-msg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lh-open-user/lh-open-user.iml" filepath="$PROJECT_DIR$/lh-open-user/lh-open-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lh-zuul-server/lh-zuul-server.iml" filepath="$PROJECT_DIR$/lh-zuul-server/lh-zuul-server.iml" />
+    </modules>
+  </component>
+</project>

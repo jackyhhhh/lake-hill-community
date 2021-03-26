@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户信息</title>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/modify_info.js"></script>
+    <style type="text/css">
+			a {text-decoration:none;}
+			ul li {list-style:none;}
+	</style>
+</head>
+<body onload="onload()">
+<br/>&nbsp;&nbsp;&nbsp;
+<a href="myPage.html">返回我的主页</a>
+<center>
+    <h1>修改用户基本信息</h1><br>
+    <form >
+        <table border="1">
+            <tr>
+                <td>修改用户名:</td>
+                <td><input id="username" type="text" size="30" name="username" placeholder="若不改此项请忽略不填"/></td>
+            </tr>
+            <tr>
+                <td>修改昵称:</td>
+                <td><input id="nickname" type="text" size="30" name="nickname" placeholder="若不改此项请忽略不填"/></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="button" name="button" onclick="modifyInfo()" value="提交"/></td>
+            </tr>
+        </table>
+    </form>
+    <span><font id="error_box" color="red"></font> </span>
+</center>
+</body>
+</html>

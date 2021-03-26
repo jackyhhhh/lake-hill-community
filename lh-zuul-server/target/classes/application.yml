@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: lh-zuul-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8101/eureka
+  instance:
+    instance-id: lh-zuul-server
+
+
+zuul:
+  routes:
+    lh-open-user:
+      path: /user/**
+      serviceId: lh-open-user
+
+    lh-open-msg:
+      path: /msg/**
+      serviceId: lh-open-msg

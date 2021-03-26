@@ -1,0 +1,16 @@
+server:
+  port: 8101
+
+spring:
+  application:
+    name: lh-eureka-server
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: lh-eureka-server
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8101/eureka
