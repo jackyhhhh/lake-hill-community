@@ -3,22 +3,32 @@ server:
 
 spring:
   application:
-    name: lh-zuul-server
+    name: lhc-zuul-server
+
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+    password:
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8101/eureka
+      defaultZone: http://localhost:8000/eureka
   instance:
-    instance-id: lh-zuul-server
-
+    instance-id: lhc-zuul-server
 
 zuul:
+  sensitiveHeaders:
   routes:
-    lh-open-user:
+    user_service:
       path: /user/**
-      serviceId: lh-open-user
-
-    lh-open-msg:
+      serviceId: lhc-user
+    msg_service:
       path: /msg/**
-      serviceId: lh-open-msg
+      serviceId: lhc-msg
