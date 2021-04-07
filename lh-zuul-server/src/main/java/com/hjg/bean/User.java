@@ -15,6 +15,8 @@ public class User {
     private Date updateTime;
     private Date createTime;
 
+    public User(){}
+
     public User(Integer uid, String username, String nickname, String password, Integer status, Date onlineTime, Date updateTime, Date createTime) {
         this.uid = uid;
         this.username = username;

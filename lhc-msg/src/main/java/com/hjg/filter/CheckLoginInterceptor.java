@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
-import java.util.LinkedHashMap;
 
 @Slf4j
 @Component
@@ -34,6 +33,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        initRequestId(request);
         if (! (handler instanceof HandlerMethod)) {
             return true;
         }
@@ -42,10 +42,10 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        String token = httpUtil.getTokenFromRequest(request);
+        String token = HttpUtil.getTokenFromRequest(request);
         if(token != null){
             String json = redisTemplate.boundValueOps(token).get();
-            log.info("get userJson from redis with token as key: user={}, getExpire={}", json, redisTemplate.boundValueOps(token).getExpire());
+            log.info("get userJson from redis: user={}, getExpire={}, {}", json, redisTemplate.boundValueOps(token).getExpire(), ThreadContext.requestId());
             User user = JSON.parseObject(json, User.class);
             if (user != null) {
                 ThreadContext.initUser(user);
@@ -65,5 +65,10 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         ThreadContext.removeAll();
+    }
+
+    private void initRequestId(HttpServletRequest request){
+        String requestId = request.getHeader("requestId");
+        ThreadContext.initRequestId(requestId);
     }
 }

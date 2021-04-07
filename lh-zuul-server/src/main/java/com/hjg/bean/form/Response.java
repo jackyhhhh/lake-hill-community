@@ -1,15 +1,17 @@
 package com.hjg.bean.form;
 
 import com.alibaba.fastjson.annotation.JSONType;
+import com.hjg.util.ThreadContext;
 import lombok.Data;
 
 @Data
-@JSONType(orders = {"code", "result", "msg", "obj"})
+@JSONType(orders = {"code", "result", "msg", "obj", "requestId"})
 public class Response {
     private Integer code;
     private String result;
     private String msg;
     private Object obj;
+    private String requestId;
 
     public Response(){}
 
@@ -18,6 +20,7 @@ public class Response {
         this.result = result;
         this.msg = msg;
         this.obj = obj;
+        this.requestId = ThreadContext.requestId();
     }
 
     public static Response success(){return new Response(200, "SUCCESS", "OK", 1); }

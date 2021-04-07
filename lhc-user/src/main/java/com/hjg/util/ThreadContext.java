@@ -8,7 +8,7 @@ import java.util.Map;
 public class ThreadContext {
 
     private static final ThreadLocal<Map<String, Object>> context = new ThreadLocal<>();
-    private static Map<String, Object> content = new HashMap<>();
+    private static final Map<String, Object> content = new HashMap<>();
     static {
         context.set(content);
     }
@@ -25,6 +25,18 @@ public class ThreadContext {
         content.remove("user");
     }
 
+    public static void initRequestId(String requestId){
+        content.put("requestId", requestId);
+    }
+
+    public static String requestId(){
+        return (String) content.get("requestId");
+    }
+
+    public static void removeRequestId(){
+        content.remove("requestId");
+    }
+
     public static void set(String key, Object value){
         content.put(key, value);
     }
@@ -38,7 +50,7 @@ public class ThreadContext {
     }
 
     public static void removeAll(){
-        content = new HashMap<>();
+        content.clear();
     }
 
 

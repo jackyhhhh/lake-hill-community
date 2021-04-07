@@ -5,6 +5,7 @@ import com.hjg.annotation.LoginFree;
 import com.hjg.bean.User;
 import com.hjg.bean.form.Response;
 import com.hjg.service.UserService;
+import com.hjg.util.LogUtil;
 import com.hjg.util.ThreadContext;
 import com.hjg.service.TokenService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +35,9 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        initRequestId(request);
         if (! (handler instanceof HandlerMethod)) {
-            log.debug("handler(not HandlerMethod): " + handler.getClass().getName());
+            log.debug(LogUtil.format("handler(not HandlerMethod): " + handler.getClass().getName()));
             return true;
         }
         Method method = ((HandlerMethod) handler).getMethod();
@@ -43,7 +45,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
             return true;
         }
         String token = tokenService.getTokenFromRequest(request);
-        log.info("拦截器中获得token: {}", token);
+        log.info("拦截器中获得token: {}, {}", token, ThreadContext.requestId());
         if(tokenService.checkToken(token)){
             int uid = Integer.parseInt((tokenService.getMapFromToken(token).get("uid")));
             User user = userService.findByUid(uid);
@@ -51,7 +53,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
                 ThreadContext.initUser(user);
                 redisTemplate.boundValueOps("uid_" + uid).set(JSON.toJSONString(user));
                 redisTemplate.boundValueOps("uid_" + uid).expire(30, TimeUnit.MINUTES);
-                log.debug("uid_"+uid+" => (expire)" + redisTemplate.boundValueOps("uid_" + uid).getExpire());
+                log.debug(LogUtil.format("uid_"+uid+" => (expire)" + redisTemplate.boundValueOps("uid_" + uid).getExpire()));
             }
             return true;
         }
@@ -68,5 +70,11 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         ThreadContext.removeAll();
+    }
+
+    private void initRequestId(HttpServletRequest request){
+        String requestId = request.getHeader("requestId");
+        System.out.println("=====================initRequestId=============="+requestId);
+        ThreadContext.initRequestId(requestId);
     }
 }

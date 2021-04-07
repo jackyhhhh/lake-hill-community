@@ -28,10 +28,12 @@ public class MessageServiceImpl implements MessageService {
     public Message getLastMessageForUser(User user) {
         if(user != null){
             Date onlineTime = user.getOnlineTime();
-            Pageable pageable = PageRequest.of(0, 1, Sort.by("sendTime").descending());
-            Page<Message> messages = messageRepository.getBySendTimeGreaterThan(onlineTime, pageable);
-            if(messages != null && messages.getContent().size() > 0){
-                return messages.getContent().get(0);
+            if (onlineTime != null) {
+                Pageable pageable = PageRequest.of(0, 1, Sort.by("sendTime").descending());
+                Page<Message> messages = messageRepository.getBySendTimeGreaterThan(onlineTime, pageable);
+                if(messages != null && messages.getContent().size() > 0){
+                    return messages.getContent().get(0);
+                }
             }
         }
         return null;
@@ -40,7 +42,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Page<Message> getMessagesInPageForUser(User user, int pageNum, int pageSize) {
         Page<Message> messages = null;
-        if(user != null){
+        if(user != null && user.getOnlineTime() != null){
             Pageable pageable = PageRequest.of(pageNum, pageSize, Sort.by("sendTime").descending());
             messages = messageRepository.getBySendTimeGreaterThan(user.getOnlineTime(), pageable);
         }

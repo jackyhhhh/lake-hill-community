@@ -1,0 +1,58 @@
+[1mdiff --git a/lh-zuul-server/src/main/java/com/hjg/filter/CheckLoginStatusFilter.java b/lh-zuul-server/src/main/java/com/hjg/filter/CheckLoginStatusFilter.java[m
+[1mindex b75c2c8..a8a60be 100644[m
+[1m--- a/lh-zuul-server/src/main/java/com/hjg/filter/CheckLoginStatusFilter.java[m
+[1m+++ b/lh-zuul-server/src/main/java/com/hjg/filter/CheckLoginStatusFilter.java[m
+[36m@@ -1,12 +1,9 @@[m
+ package com.hjg.filter;[m
+ [m
+ import com.alibaba.fastjson.JSON;[m
+[31m-import com.hjg.bean.User;[m
+ import com.hjg.bean.form.Response;[m
+ import com.hjg.controller.UserController;[m
+[31m-import com.hjg.exceptions.AccessDeniedException;[m
+[31m-import com.hjg.util.HttpUtil;[m
+[31m-import com.hjg.util.ThreadContext;[m
+[32m+[m[32mimport com.hjg.util.CookieUtil;[m
+ import com.netflix.zuul.ZuulFilter;[m
+ import com.netflix.zuul.context.RequestContext;[m
+ import com.netflix.zuul.exception.ZuulException;[m
+[36m@@ -15,7 +12,6 @@[m [mimport org.springframework.beans.factory.annotation.Autowired;[m
+ import org.springframework.data.redis.core.RedisTemplate;[m
+ import org.springframework.stereotype.Component;[m
+ [m
+[31m-import javax.servlet.http.Cookie;[m
+ import javax.servlet.http.HttpServletRequest;[m
+ import javax.servlet.http.HttpServletResponse;[m
+ import java.io.IOException;[m
+[36m@@ -55,7 +51,7 @@[m [mpublic class CheckLoginStatusFilter extends ZuulFilter {[m
+         log.info("-------------------------{}{}-----run()--------------------------", filterType(), filterOrder());[m
+         RequestContext ctx = RequestContext.getCurrentContext();[m
+         HttpServletRequest request = ctx.getRequest();[m
+[31m-        String token = getTokenFromRequest(request);[m
+[32m+[m[32m        String token = CookieUtil.getTokenFromRequest(request);[m
+         log.info("CheckLoginStatusFilter: token= {}", token);[m
+         if (token == null) {[m
+             ctx.setSendZuulResponse(false);[m
+[36m@@ -71,21 +67,7 @@[m [mpublic class CheckLoginStatusFilter extends ZuulFilter {[m
+         Object data = res.getObj();[m
+         String json = JSON.toJSONString(data);[m
+         redisTemplate.boundValueOps(token).set(json, 10, TimeUnit.SECONDS);[m
+[31m-        log.info("set userJson into redis with token as key: " + redisTemplate.boundValueOps(token).get());[m
+[31m-        return null;[m
+[31m-    }[m
+[31m-[m
+[31m-    private String getTokenFromRequest(HttpServletRequest request) {[m
+[31m-        if(request != null){[m
+[31m-            Cookie[] cookies = request.getCookies();[m
+[31m-            if (cookies != null && cookies.length > 0) {[m
+[31m-                for (Cookie cookie : cookies) {[m
+[31m-                    if ("token".equals(cookie.getName())) {[m
+[31m-                        return cookie.getValue();[m
+[31m-                    }[m
+[31m-                }[m
+[31m-            }[m
+[31m-        }[m
+[32m+[m[32m        log.info("send userJson to redis with token as key: " + redisTemplate.boundValueOps(token).get());[m
+         return null;[m
+     }[m
+ [m

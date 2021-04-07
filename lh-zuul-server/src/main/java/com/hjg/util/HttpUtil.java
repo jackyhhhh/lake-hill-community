@@ -21,7 +21,7 @@ public class HttpUtil {
     @Autowired
     private RestTemplate restTemplate;
 
-    public String getTokenFromRequest(HttpServletRequest request) {
+    public static String getTokenFromRequest(HttpServletRequest request) {
         if(request != null){
             Cookie[] cookies = request.getCookies();
             if (cookies != null && cookies.length > 0) {
@@ -35,15 +35,13 @@ public class HttpUtil {
         return null;
     }
 
-    public HttpEntity<?> setTokenInHttpEntity(Object requestBody, String token){
-        HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.add("Cookie", "token=" + token);
-        return new HttpEntity<>(requestBody, requestHeaders);
-    }
-
     public HttpEntity<?> setTokenInHttpEntity(Object requestBody, HttpServletRequest request){
         String token = getTokenFromRequest(request);
-        return setTokenInHttpEntity(requestBody, token);
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.add("Cookie", "token=" + token);
+        String requestId = ThreadContext.requestId();
+        requestHeaders.add("requestId", requestId);
+        return new HttpEntity<>(requestBody, requestHeaders);
     }
 
     public Response forwardGet(String url, HttpServletRequest request){
@@ -80,7 +78,7 @@ public class HttpUtil {
     }
 
     public Response forwardLogout(String url, HttpServletRequest request, HttpServletResponse response){
-        HttpEntity<?> requestEntity = setTokenInHttpEntity(null, getTokenFromRequest(request));
+        HttpEntity<?> requestEntity = setTokenInHttpEntity(null, request);
         ResponseEntity<Response> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, Response.class);
         List<String> strings = responseEntity.getHeaders().get("Set-Cookie");
         if( strings != null){
