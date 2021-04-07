@@ -4,9 +4,10 @@ import com.hjg.annotation.LoginFree;
 import com.hjg.bean.User;
 import com.hjg.bean.form.PasswordForm;
 import com.hjg.bean.form.Response;
+import com.hjg.service.TokenService;
 import com.hjg.service.UserService;
 import com.hjg.util.ThreadContext;
-import com.hjg.service.TokenService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class UserController {
     public Response regHandler(@RequestBody User form){
         String username = form.getUsername();
         String password = form.getPassword();
-        if(username == null || "".equals(username.trim()) || password == null || "".equals(password.trim())){
+        if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
             return Response.fail("username or password can not be empty !");
         }
         User user = userService.findByUsername(username);
@@ -57,7 +58,7 @@ public class UserController {
     public Response loginHandler(@RequestBody User form, HttpServletResponse response){
         String username = form.getUsername();
         String password = form.getPassword();
-        if(username == null || "".equals(username.trim()) || password == null || "".equals(password.trim())){
+        if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
             return Response.fail("username or password can not be empty !");
         }
         User user = userService.findByUsername(username);
@@ -89,10 +90,10 @@ public class UserController {
         String username = form.getUsername();
         String nickname = form.getNickname();
         User user = ThreadContext.currentUser();
-        if (username != null && ! ("".equals(username.trim()))) {
+        if (StringUtils.isBlank(username)) {
             user.setUsername(username);
         }
-        if (nickname != null && !("".equals(nickname.trim()))) {
+        if (StringUtils.isBlank(nickname)) {
             user.setNickname(nickname);
         }
         userService.save(user);
@@ -107,7 +108,7 @@ public class UserController {
         if(! (oldPassword.equals(user.getPassword()))){
             return Response.fail("invalid old password !");
         }
-        if( newPassword == null || "".equals(newPassword.trim())){
+        if( StringUtils.isBlank(newPassword)){
             return Response.fail("new password should not be null !");
         }
         user.setPassword(newPassword);
