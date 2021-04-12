@@ -19,7 +19,7 @@ public class TokenController {
 
     @GetMapping("/checkToken")
     public Response checkTokenHandler(HttpServletRequest request){
-        String token = httpUtil.getTokenFromRequest(request);
+        String token = HttpUtil.getTokenFromRequest(request);
         if(token == null){
             return Response.error(401, "ACCESS_DENIED: required token but not found !");
         }

@@ -3,7 +3,7 @@ server:
 
 spring:
   jpa:
-    show-sql: true
+#    show-sql: true
     generate-ddl: true
     hibernate:
       ddl-auto: update
@@ -45,10 +45,6 @@ logging:
   level:
     root: info
     org.hibernate: info
-    org.hibernate.hql.internal.ast.exec.BasicExecutor: trace
-    org.hibernate.type.descriptor.sql.BasicBinder: trace
-    com.hjg: info
-
-jwt:
-  key: yanzhou__jghuang
-  expire: 3h
+#    org.hibernate.hql.internal.ast.exec.BasicExecutor: trace
+#    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    com.hjg: debug

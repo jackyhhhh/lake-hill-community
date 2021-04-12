@@ -5,6 +5,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.hjg.bean.User;
 import com.hjg.service.TokenService;
 import com.hjg.util.AesEcbUtil;
+import com.hjg.util.ThreadContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -70,8 +71,8 @@ public class TokenServiceImpl implements TokenService {
         info.put("username", user.getUsername());
         info.put("nickname", user.getNickname());
         String josn = JSON.toJSONString(info);
-        log.debug("createToken: token = " + info.toString());
-        log.debug("createToken: expireTime(s) = "+getExpireTime() + "s");
+        log.debug("createToken: token = {}, {}", info.toString(), ThreadContext.requestId());
+        log.debug("createToken: expireTime(s) = {}s, {}", getExpireTime(), ThreadContext.requestId());
         return AesEcbUtil.encrypt(key, josn);
     }
 
@@ -96,8 +97,8 @@ public class TokenServiceImpl implements TokenService {
         if(info != null){
             long expireAt = Long.parseLong(info.get("expireAt"));
             long now = System.currentTimeMillis();
-            log.debug("checkToken: token = " + info.toString());
-            log.debug("checkToken: (expireAt-now)/1000 = " + (expireAt-now)/1000 +"s");
+            log.debug("checkToken: token = {}, {} ", info.toString(), ThreadContext.requestId());
+            log.debug("checkToken: (expireAt-now)/1000 = {}s, {}", (expireAt-now)/1000, ThreadContext.requestId());
             return (expireAt - now) > 0;
         }
         return false;
@@ -110,7 +111,7 @@ public class TokenServiceImpl implements TokenService {
         info.put("expireAt", expireAt+"");
         String invalidToken = AesEcbUtil.encrypt(key, JSON.toJSONString(info));
         setTokenInResponse(invalidToken, response);
-        log.debug("invalidToken: token = " + info.toString());
-        log.debug("invalidToken: (expireAt-now)/1000 = " + (expireAt-System.currentTimeMillis())/1000 + "s");
+        log.debug("invalidToken: token = {}, {}", info.toString(), ThreadContext.requestId());
+        log.debug("invalidToken: (expireAt-now)/1000 = {}s, {}", (expireAt-System.currentTimeMillis())/1000, ThreadContext.requestId());
     }
 }

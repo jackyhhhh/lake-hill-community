@@ -53,13 +53,12 @@ public class CheckLoginStatusFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         String token = HttpUtil.getTokenFromRequest(request);
-        log.info("CheckLoginStatusFilter: token= {}", token);
+        log.info("CheckLoginStatusFilter: token= {}, {}", token, ThreadContext.requestId());
         if (token == null) {
             ctx.setSendZuulResponse(false);
             responseForAccessDenied("ACCESS_DENIED: require token but not found !");
             return null;
         }
-        ctx.addZuulRequestHeader("requestId", ThreadContext.requestId());
         Response res = userController.describeHandler(request);
         if (res.getCode() == 401) {
             ctx.setSendZuulResponse(false);
@@ -69,7 +68,7 @@ public class CheckLoginStatusFilter extends ZuulFilter {
         Object data = res.getObj();
         String json = JSON.toJSONString(data);
         redisTemplate.boundValueOps(token).set(json, 10, TimeUnit.SECONDS);
-        log.info(LogUtil.format("send userJson to redis: " + redisTemplate.boundValueOps(token).get()));
+        log.info(LogUtil.format("send userJson to redis: " + redisTemplate.boundValueOps(token).get() + ThreadContext.requestId()));
         return null;
     }
 

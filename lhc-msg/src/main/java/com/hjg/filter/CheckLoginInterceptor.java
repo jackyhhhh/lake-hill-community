@@ -69,6 +69,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
 
     private void initRequestId(HttpServletRequest request){
         String requestId = request.getHeader("requestId");
+        System.out.println("=====================initRequestId=============="+requestId);
         ThreadContext.initRequestId(requestId);
     }
 }

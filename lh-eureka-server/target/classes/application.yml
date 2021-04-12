@@ -7,7 +7,7 @@ spring:
 eureka:
   instance:
     hostname: localhost
-    instance-id: lh-eureka-server
+#    instance-id: lh-eureka-server
 
   client:
     register-with-eureka: false

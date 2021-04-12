@@ -48,7 +48,3 @@ logging:
     org.hibernate.hql.internal.ast.exec.BasicExecutor: trace
     org.hibernate.type.descriptor.sql.BasicBinder: trace
     com.hjg: info
-
-jwt:
-  key: yanzhou__jghuang
-  expire: 3h

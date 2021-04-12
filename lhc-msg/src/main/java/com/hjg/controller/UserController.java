@@ -22,7 +22,7 @@ public class UserController {
     @LoginFree
     @GetMapping("/describe")
     public Response describeHandler(HttpServletRequest request){
-        String token = httpUtil.getTokenFromRequest(request);
+        String token = HttpUtil.getTokenFromRequest(request);
         if(token == null) {
             return Response.error(401, "ACCESS_DENIED: invalid token !");
         }
