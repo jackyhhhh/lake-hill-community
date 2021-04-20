@@ -15,17 +15,6 @@ spring:
     username: root
     password: root
 
-  redis:
-    database: 1
-    host: localhost
-    port: 6379
-    password:
-    jedis:
-      pool:
-        max-active: 8
-        max-idle: 8
-        min-idle: 0
-
   application:
     name: lhc-msg
 
@@ -39,8 +28,8 @@ eureka:
     instance-id: lhc-msg
 
 logging:
-#  pattern:
-#    console: I[%date][%level]-%msg%n
+  pattern:
+    console: I[%date][%level]-%msg%n
 
   level:
     root: info

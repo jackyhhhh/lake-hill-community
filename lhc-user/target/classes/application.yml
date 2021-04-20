@@ -35,8 +35,7 @@ eureka:
       defaultZone: http://localhost:8000/eureka
   instance:
     hostname: localhost
-    prefer-ip-address: true
-#    instance-id: lhc-user
+    instance-id: lhc-user
 
 logging:
   pattern:

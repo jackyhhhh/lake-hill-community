@@ -90,10 +90,10 @@ public class UserController {
         String username = form.getUsername();
         String nickname = form.getNickname();
         User user = ThreadContext.currentUser();
-        if (StringUtils.isBlank(username)) {
+        if (! StringUtils.isBlank(username)) {
             user.setUsername(username);
         }
-        if (StringUtils.isBlank(nickname)) {
+        if (! StringUtils.isBlank(nickname)) {
             user.setNickname(nickname);
         }
         userService.save(user);
@@ -117,15 +117,16 @@ public class UserController {
     }
 
     @PostMapping("/removeUser")
-    public Response deleteHandler(@RequestBody User form){
+    public Response deleteHandler(@RequestBody User form, HttpServletRequest request, HttpServletResponse response){
         User user = ThreadContext.currentUser();
         if (user == null) {
-            return Response.fail("user not found !");
+            return Response.error(401, "ACCESS_DENIED: invalid token !");
         }
         if(! user.getPassword().equals(form.getPassword())){
             return Response.fail("invalid password !");
         }
         userService.deleteById(user.getUid());
+        tokenService.invalidToken(tokenService.getTokenFromRequest(request), response);
         return Response.success();
     }
 

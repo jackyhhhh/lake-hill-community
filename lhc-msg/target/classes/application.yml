@@ -3,7 +3,7 @@ server:
 
 spring:
   jpa:
-    show-sql: true
+#    show-sql: true
     generate-ddl: true
     hibernate:
       ddl-auto: update
@@ -14,17 +14,6 @@ spring:
     url: jdbc:mysql:///ms_api?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8
     username: root
     password: root
-
-  redis:
-    database: 1
-    host: localhost
-    port: 6379
-    password:
-    jedis:
-      pool:
-        max-active: 8
-        max-idle: 8
-        min-idle: 0
 
   application:
     name: lhc-msg
@@ -39,12 +28,12 @@ eureka:
     instance-id: lhc-msg
 
 logging:
-#  pattern:
-#    console: I[%date][%level]-%msg%n
+  pattern:
+    console: I[%date][%level]-%msg%n
 
   level:
     root: info
     org.hibernate: info
-    org.hibernate.hql.internal.ast.exec.BasicExecutor: trace
-    org.hibernate.type.descriptor.sql.BasicBinder: trace
-    com.hjg: info
+#    org.hibernate.hql.internal.ast.exec.BasicExecutor: trace
+#    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    com.hjg: debug

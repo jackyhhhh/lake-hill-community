@@ -106,12 +106,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public void invalidToken(String token, HttpServletResponse response) {
-        Map<String, String> info = getMapFromToken(token);
-        long expireAt = System.currentTimeMillis();
-        info.put("expireAt", expireAt+"");
-        String invalidToken = AesEcbUtil.encrypt(key, JSON.toJSONString(info));
-        setTokenInResponse(invalidToken, response);
-        log.debug("invalidToken: token = {}, {}", info.toString(), ThreadContext.requestId());
-        log.debug("invalidToken: (expireAt-now)/1000 = {}s, {}", (expireAt-System.currentTimeMillis())/1000, ThreadContext.requestId());
+        setTokenInResponse("", response);
+        log.debug("invalidToken: Cookie={}, {}", response.getHeader("Cookie"), ThreadContext.requestId());
     }
 }

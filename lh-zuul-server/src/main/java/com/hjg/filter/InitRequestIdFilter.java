@@ -4,12 +4,10 @@ import com.hjg.util.ThreadContext;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@Slf4j
 @Component
 public class InitRequestIdFilter extends ZuulFilter {
     @Override

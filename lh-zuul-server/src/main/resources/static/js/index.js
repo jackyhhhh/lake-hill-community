@@ -1,7 +1,7 @@
 var host = localStorage.getItem("host");
 function onload(){
     var label = document.getElementById("checkStatus");
-    getData(host + "/checkToken")
+    getData(host + "/user/checkToken")
     .then(res=>{
         if(isNotNull(res) && res.msg.indexOf("ACCESS_DENIED") != -1){
             console.log(res);

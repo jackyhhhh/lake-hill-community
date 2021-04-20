@@ -4,29 +4,24 @@ import com.alibaba.fastjson.JSON;
 import com.hjg.bean.form.Response;
 import com.hjg.controller.UserController;
 import com.hjg.util.HttpUtil;
-import com.hjg.util.LogUtil;
 import com.hjg.util.ThreadContext;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
 public class CheckLoginStatusFilter extends ZuulFilter {
     @Autowired
     private UserController userController;
-    @Autowired
-    private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public String filterType() {
@@ -43,7 +38,7 @@ public class CheckLoginStatusFilter extends ZuulFilter {
         HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
         String uri = request.getRequestURI();
         boolean shouldFilter = ! uri.startsWith("/user/");
-        log.info("{}, URI: {}, shouldFilter= {}, requestId = {}", request.getMethod(), uri, shouldFilter, ThreadContext.requestId());
+        log.info("==========>>{} {}, shouldFilter= {}, {}", request.getMethod(), uri, shouldFilter, ThreadContext.requestId());
         return shouldFilter;
     }
 
@@ -57,18 +52,20 @@ public class CheckLoginStatusFilter extends ZuulFilter {
         if (token == null) {
             ctx.setSendZuulResponse(false);
             responseForAccessDenied("ACCESS_DENIED: require token but not found !");
+            log.info("token验证不通过, 返回401无权限:ACCESS_DENIED: require token but not found ! {}", ThreadContext.requestId());
             return null;
         }
         Response res = userController.describeHandler(request);
         if (res.getCode() == 401) {
             ctx.setSendZuulResponse(false);
             responseForAccessDenied("ACCESS_DENIED: invalid token !");
+            log.info("token验证不通过, 返回401无权限:ACCESS_DENIED: invalid token ! {}", ThreadContext.requestId());
             return null;
         }
         Object data = res.getObj();
-        String json = JSON.toJSONString(data);
-        redisTemplate.boundValueOps(token).set(json, 10, TimeUnit.SECONDS);
-        log.info(LogUtil.format("send userJson to redis: " + redisTemplate.boundValueOps(token).get() + ThreadContext.requestId()));
+        String userJson = JSON.toJSONString(data);
+        ctx.addZuulRequestHeader("userJson", userJson);
+        log.info("set userJson in headers: userJson={}, {}", userJson, ThreadContext.requestId());
         return null;
     }
 

@@ -9,7 +9,6 @@ import com.hjg.util.HttpUtil;
 import com.hjg.util.ThreadContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -28,8 +27,6 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
     private UserController userController;
     @Autowired
     private HttpUtil httpUtil;
-    @Autowired
-    private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -44,9 +41,9 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
 
         String token = HttpUtil.getTokenFromRequest(request);
         if(token != null){
-            String json = redisTemplate.boundValueOps(token).get();
-            log.info("get userJson from redis: user={}, getExpire={}, {}", json, redisTemplate.boundValueOps(token).getExpire(), ThreadContext.requestId());
-            User user = JSON.parseObject(json, User.class);
+            String userJson = request.getHeader("userJson");
+            log.info("userJson from headers: user={}, {}", userJson, ThreadContext.requestId());
+            User user = JSON.parseObject(userJson, User.class);
             if (user != null) {
                 ThreadContext.initUser(user);
                 return true;
@@ -59,6 +56,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
         pw.println(json);
         pw.flush();
         pw.close();
+        log.info("token验证不通过, 返回401无权限:ACCESS_DENIED: invalid token ! {}", ThreadContext.requestId());
         return false;
     }
 
@@ -69,7 +67,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
 
     private void initRequestId(HttpServletRequest request){
         String requestId = request.getHeader("requestId");
-        System.out.println("=====================initRequestId=============="+requestId);
+        log.info("==========>>{} {}, {}",request.getMethod(), request.getRequestURI(), requestId);
         ThreadContext.initRequestId(requestId);
     }
 }

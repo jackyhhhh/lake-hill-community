@@ -64,6 +64,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
         pw.println(json);
         pw.flush();
         pw.close();
+        log.info("token验证不通过, 返回401无权限:ACCESS_DENIED: invalid token ! {}", ThreadContext.requestId());
         return false;
     }
 
@@ -74,7 +75,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
 
     private void initRequestId(HttpServletRequest request){
         String requestId = request.getHeader("requestId");
-        System.out.println("=====================initRequestId=============="+requestId);
+        log.info("==========>>{} {}, {}",request.getMethod(), request.getRequestURI(), requestId);
         ThreadContext.initRequestId(requestId);
     }
 }

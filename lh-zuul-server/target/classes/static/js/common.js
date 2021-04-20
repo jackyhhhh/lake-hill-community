@@ -36,18 +36,16 @@ function setLocalStorageItem(uid, username, nickname, token){
 }
 
 // 清空本站业务相关的localStorage Item
-function removeLocalStorageItem(){
-   turnUserOffline(localStorage.getItem("username"));
-　　localStorage.clear();
-}
-
-function turnUserOffline(username){
-    var url = host + "/user/turnOff?username=" + username;
-    getData(url).then(res=>{
-        if(!(res.msg === "OK")){
-            console.log("下线失败, 因为:"+res.msg);
+function logout(){
+　　 localStorage.clear();
+    getData(host + "/user/logout").then(res=>{
+        if(isNotNull(res) && res.result=="FAILED"){
+            window.alert("发生未知错误");
         }
-    }).catch(error=>console.log(error))
+        console.log(res);
+    })
+    window.alert("您已退出登录, 即将返回首页...")
+    window.location.href=host+"/index.html"
 }
 
 // post请求并返回数据
@@ -88,8 +86,7 @@ function getData(url) {
 //初始化应用缓存
 (function(){
     if(!getCookie('eks_cache_keys')){//每次进入页面初始化缓存
-       turnUserOffline(localStorage.getItem("username"));
-    　　localStorage.clear();
+       logout();
     　　setCookie('eks_cache_keys',true);
     }
 })();
@@ -141,7 +138,7 @@ function checkTokenInRes(res){
 
 //检查token是否有效
 function checkToken(){
-    getData(host + "/checkToken").then(res=>{
+    getData(host + "/user/checkToken").then(res=>{
         checkTokenInRes(res);
     }).catch(error=>console.log(error))
 }

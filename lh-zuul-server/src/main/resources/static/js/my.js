@@ -20,7 +20,7 @@ function removeUser(){
     }
     url = host + "/user/removeUser"
     postData(url, Data).then(res=>{
-        if(res.result == "FAILED"){
+        if(res.result == "FAILED" || res.result == "ERROR"){
             error_box.innerHTML == res.msg;
         }else {
             window.location.assign(host + "/index.html");
@@ -45,19 +45,6 @@ function onload(){
     }else{
         user.innerHTML = localStorage.getItem("username")+" ";
     }
-}
-
-
-function logout(){
-    removeLocalStorageItem();
-    getData(host + "/user/logout?uid="+uid).then(res=>{
-        if(isNotNull(res) && res.result=="FAILED"){
-            window.alert("发生未知错误");
-        }
-        console.log(res)
-    })
-    window.alert("您已退出登录, 即将返回首页...")
-    window.location.href=host+"/index.html"
 }
 
 function goChatting(){
