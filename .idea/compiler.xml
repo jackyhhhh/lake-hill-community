@@ -8,26 +8,26 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="lhc-msg" />
-        <module name="lh-zuul-server" />
+        <module name="lhc-eureka-server" />
         <module name="lhc-user" />
-        <module name="lh-eureka-server" />
+        <module name="lhc-zuul-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="lh-eureka-server" target="1.8" />
       <module name="lh-zuul" target="1.8" />
-      <module name="lh-zuul-server" target="1.8" />
+      <module name="lhc-eureka-server" target="1.8" />
       <module name="lhc-msg" target="1.8" />
       <module name="lhc-user" target="1.8" />
+      <module name="lhc-zuul-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="lh-eureka-server" options="-parameters" />
       <module name="lh-zuul" options="-parameters" />
-      <module name="lh-zuul-server" options="-parameters" />
+      <module name="lhc-eureka-server" options="-parameters" />
       <module name="lhc-msg" options="-parameters" />
       <module name="lhc-user" options="-parameters" />
+      <module name="lhc-zuul-server" options="-parameters" />
     </option>
   </component>
 </project>

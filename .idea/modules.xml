@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/lh-eureka-server/lh-eureka-server.iml" filepath="$PROJECT_DIR$/lh-eureka-server/lh-eureka-server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lh-zuul-server/lh-zuul-server.iml" filepath="$PROJECT_DIR$/lh-zuul-server/lh-zuul-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lhc-eureka-server/lhc-eureka-server.iml" filepath="$PROJECT_DIR$/lhc-eureka-server/lhc-eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/lhc-msg/lhc-msg.iml" filepath="$PROJECT_DIR$/lhc-msg/lhc-msg.iml" />
       <module fileurl="file://$PROJECT_DIR$/lhc-user/lhc-user.iml" filepath="$PROJECT_DIR$/lhc-user/lhc-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lhc-zuul-server/lhc-zuul-server.iml" filepath="$PROJECT_DIR$/lhc-zuul-server/lhc-zuul-server.iml" />
     </modules>
   </component>
 </project>

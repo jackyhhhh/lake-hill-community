@@ -11,6 +11,8 @@
         <option value="$PROJECT_DIR$/lhc-user/pom.xml" />
         <option value="$PROJECT_DIR$/lh-eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/lhc-msg/pom.xml" />
+        <option value="$PROJECT_DIR$/lhc-eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/lhc-zuul-server/pom.xml" />
       </list>
     </option>
   </component>
