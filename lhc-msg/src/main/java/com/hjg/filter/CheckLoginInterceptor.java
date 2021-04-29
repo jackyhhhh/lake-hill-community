@@ -8,6 +8,7 @@ import com.hjg.controller.UserController;
 import com.hjg.util.HttpUtil;
 import com.hjg.util.ThreadContext;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.net.URLDecoder;
 
 @Slf4j
 @Component
@@ -42,7 +44,8 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
         String token = HttpUtil.getTokenFromRequest(request);
         if(token != null){
             String userJson = request.getHeader("userJson");
-            log.info("userJson from headers: user={}, {}", userJson, ThreadContext.requestId());
+            userJson = URLDecoder.decode(userJson, "UTF-8");
+            log.info("userJson from headers: user={}", userJson);
             User user = JSON.parseObject(userJson, User.class);
             if (user != null) {
                 ThreadContext.initUser(user);
@@ -56,7 +59,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
         pw.println(json);
         pw.flush();
         pw.close();
-        log.info("token验证不通过, 返回401无权限:ACCESS_DENIED: invalid token ! {}", ThreadContext.requestId());
+        log.info("token验证不通过, 返回401无权限:ACCESS_DENIED: invalid token !");
         return false;
     }
 
@@ -67,7 +70,8 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
 
     private void initRequestId(HttpServletRequest request){
         String requestId = request.getHeader("requestId");
-        log.info("==========>>{} {}, {}",request.getMethod(), request.getRequestURI(), requestId);
+        MDC.put("requestId", requestId);
         ThreadContext.initRequestId(requestId);
+        log.info("==========>>{} {}",request.getMethod(), request.getRequestURI());
     }
 }

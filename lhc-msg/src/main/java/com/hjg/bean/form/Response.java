@@ -2,11 +2,9 @@ package com.hjg.bean.form;
 
 import com.alibaba.fastjson.annotation.JSONType;
 import com.hjg.util.ThreadContext;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 @JSONType(orders = {"code", "result", "msg", "obj", "requestId"})
 public class Response {
     private Integer code;

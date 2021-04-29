@@ -4,6 +4,7 @@ import com.hjg.util.ThreadContext;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -27,8 +28,9 @@ public class InitRequestIdFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-        String requestId = "[requestId: " + UUID.randomUUID().toString().replace("-", "")  + "]";
-        ThreadContext.set("requestId", requestId);
+        String requestId = UUID.randomUUID().toString().replace("-", "");
+        ThreadContext.initRequestId(requestId);
+        MDC.put("requestId", requestId);
         RequestContext requestContext = RequestContext.getCurrentContext();
         requestContext.addZuulRequestHeader("requestId", requestId);
         return null;
