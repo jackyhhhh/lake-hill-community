@@ -32,14 +32,17 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8000/eureka
+      defaultZone: http://127.0.0.1:8000/eureka
   instance:
-    hostname: localhost
-    instance-id: lhc-user
+    prefer-ip-address: true
+    ip-address: ${spring.cloud.client.ip-address}
+    non-secure-port-enabled: true
+    non-secure-port: ${server.port}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
 
 logging:
   pattern:
-    console: I[%date][%level]-%msg%n
+    console: "[%date][%-5level][reqId:%X{requestId}][%logger]=> %msg%n"
 
   level:
     root: info

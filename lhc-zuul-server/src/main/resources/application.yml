@@ -8,9 +8,13 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8000/eureka
+      defaultZone: http://127.0.0.1:8000/eureka
   instance:
-    instance-id: lhc-zuul-server
+    prefer-ip-address: true
+    ip-address: ${spring.cloud.client.ip-address}
+    non-secure-port-enabled: true
+    non-secure-port: ${server.port}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
 
 zuul:
   sensitiveHeaders:
@@ -21,3 +25,9 @@ zuul:
     msg_service:
       path: /msg/**
       serviceId: lhc-msg
+  host:
+    connect-timeout-millis: 3000
+
+logging:
+  pattern:
+    console: "[%date][%-5level][reqId:%X{requestId}][%logger]-> %msg%n"

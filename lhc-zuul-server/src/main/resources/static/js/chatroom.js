@@ -72,8 +72,8 @@ function send(){
     var nickname = localStorage.getItem("nickname");
     const url = host + "/msg/saveMsg";
     const params = {
-        "username": username,
-        "nickname": nickname,
+//        "username": username,
+//        "nickname": nickname,
         "content": content
     }
     postData(url, params).then(res=>{

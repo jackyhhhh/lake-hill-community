@@ -11,7 +11,7 @@ public class Response {
     private String result;
     private String msg;
     private Object obj;
-    private String requestId;
+    private String reqId;
 
     public Response(){}
 
@@ -20,7 +20,7 @@ public class Response {
         this.result = result;
         this.msg = msg;
         this.obj = obj;
-        this.requestId = ThreadContext.requestId();
+        this.reqId = ThreadContext.requestId();
     }
 
     public static Response success(){return new Response(200, "SUCCESS", "OK", 1); }

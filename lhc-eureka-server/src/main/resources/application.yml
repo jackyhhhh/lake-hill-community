@@ -6,11 +6,14 @@ spring:
     name: lhc-eureka-server
 eureka:
   instance:
-    hostname: localhost
-
+    prefer-ip-address: true
+    ip-address: ${spring.cloud.client.ip-address}
+    non-secure-port-enabled: true
+    non-secure-port: ${server.port}
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://localhost:8000/eureka
+      defaultZone: http://${eureka.instance.instance-id}/eureka
 

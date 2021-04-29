@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @RestController
 @RequestMapping()
@@ -18,12 +20,14 @@ public class MessageController {
     private MessageService messageService;
 
     @PostMapping("/saveMsg")
-    public Response saveMsgHandler(@RequestBody Message message){
+    public Response saveMsgHandler(@RequestBody Map<String, String> params){
         User user = ThreadContext.currentUser();
-        message.setUsername(user.getUsername());
-        message.setNickname(user.getNickname());
-        messageService.saveMsg(message);
-        Response response = Response.success(messageService.getLastMessageForUser(ThreadContext.currentUser()));
+        Message msg = new Message();
+        msg.setContent((params.get("content")));
+        msg.setUsername(user.getUsername());
+        msg.setNickname(user.getNickname());
+        messageService.saveMsg(msg);
+        Response response = Response.success(messageService.getLastMessageForUser(user));
         response.setMsg("消息发送成功!");
         return response;
     }

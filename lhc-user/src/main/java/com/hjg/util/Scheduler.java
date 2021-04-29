@@ -31,17 +31,17 @@ public class Scheduler {
                 i++;
                 String s = redisTemplate.boundValueOps("uid_" + u.getUid()).get();
                 if (s == null && u.getStatus() == User.STATUS_ON) {
-                    log.debug("定时任务(刷新用户状态)执行第 " + count + " 次! all.size():"+all.size() + ", " + ThreadContext.requestId());
-                    log.debug("(" + i + ")" + u.getUsername() + " statusBefore: "+u.getStatus() + ", " + ThreadContext.requestId());
+                    log.debug("定时任务(刷新用户状态)执行第 " + count + " 次! all.size():"+all.size());
+                    log.debug("(" + i + ")" + u.getUsername() + " statusBefore: "+u.getStatus());
                     u.setStatus(User.STATUS_OFF);
                     u.setOnlineTime(null);
                     log.debug("statusAfter: "+u.getStatus() + ", " + ThreadContext.requestId());
                 }else if ( s != null && u.getStatus() == User.STATUS_OFF){
-                    log.debug("定时任务(刷新用户状态)执行第 " + count + " 次! all.size():"+all.size() + ", " + ThreadContext.requestId());
-                    log.debug("(" + i + ")" + u.getUsername() + " statusBefore: "+u.getStatus() + ", " + ThreadContext.requestId());
+                    log.debug("定时任务(刷新用户状态)执行第 " + count + " 次! all.size():"+all.size());
+                    log.debug("(" + i + ")" + u.getUsername() + " statusBefore: "+u.getStatus());
                     u.setOnlineTime(new Date());
                     u.setStatus(User.STATUS_ON);
-                    log.debug("statusAfter: "+u.getStatus() + ", " + ThreadContext.requestId());
+                    log.debug("statusAfter: "+u.getStatus());
                 }
                 userService.save(u);
             }

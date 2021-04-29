@@ -7,6 +7,7 @@ import com.hjg.bean.form.Response;
 import com.hjg.service.TokenService;
 import com.hjg.service.UserService;
 import com.hjg.util.ThreadContext;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
+@Slf4j
 @RestController
 @RequestMapping()
 public class UserController {
@@ -137,7 +139,9 @@ public class UserController {
     }
 
     @GetMapping("/online")
-    public Response onlineHandler(){ return Response.success(userService.findByStatus(User.STATUS_ON));}
+    public Response onlineHandler(){
+        return Response.success(userService.findByStatus(User.STATUS_ON));
+    }
 
     @GetMapping("/offline")
     public Response offlineHandler(){
@@ -146,7 +150,9 @@ public class UserController {
 
     @GetMapping("/all")
     public Response listAllHandler(){
-        return Response.success(userService.findAll());
+        Response response = Response.success(userService.findAll());
+        log.debug("/all return: {}", response);
+        return response;
     }
 
 }
