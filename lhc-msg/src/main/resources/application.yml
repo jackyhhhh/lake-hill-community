@@ -2,6 +2,11 @@ server:
   port: 8200
 
 spring:
+  profiles:
+    active: dev
+  application:
+    name: lhc-msg
+
   jpa:
 #    show-sql: true
     generate-ddl: true
@@ -11,17 +16,14 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql:///ms_api?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8
+    url: jdbc:mysql://${db.ip}:3306/ms_api?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8
     username: root
-    password: root
-
-  application:
-    name: lhc-msg
+    password: ${db.password}
 
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8000/eureka
+      defaultZone: http://${eureka-server-ip}:8000/eureka
 
   instance:
     prefer-ip-address: true
@@ -31,12 +33,30 @@ eureka:
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
 
 logging:
+  file:
+    clean-history-on-start: true
+    max-size: 100MB
+    max-history: 7
   pattern:
-    console: "[%date][%-5level][reqId:%X{requestId}][%logger] - %msg%n"
-
+    console: "[%date][%-5level][reqId:%X{requestId}][%logger]-> %msg%n"
+    file: "[LHC-MSG][%date][%-5level][reqId:%X{requestId}][%logger]-> %msg%n"
   level:
     root: info
     org.hibernate: info
-#    org.hibernate.hql.internal.ast.exec.BasicExecutor: trace
-#    org.hibernate.type.descriptor.sql.BasicBinder: trace
     com.hjg: debug
+
+---
+spring.profiles: dev
+logging.file.path: E:\dev_log
+eureka-server-ip: 127.0.0.1
+db:
+  ip: 127.0.0.1
+  password: root
+
+---
+spring.profiles: pro
+logging.file.path: /root/lhc/logs
+eureka-server-ip: 172.18.0.2
+db:
+  ip: 172.17.0.16
+  password:

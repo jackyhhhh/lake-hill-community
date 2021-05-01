@@ -2,13 +2,15 @@ server:
   port: 8080
 
 spring:
+  profiles:
+    active: dev
   application:
     name: lhc-zuul-server
 
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8000/eureka
+      defaultZone: http://${eureka-server-ip}:8000/eureka
   instance:
     prefer-ip-address: true
     ip-address: ${spring.cloud.client.ip-address}
@@ -29,5 +31,20 @@ zuul:
     connect-timeout-millis: 3000
 
 logging:
+  file:
+    clean-history-on-start: true
+    max-size: 100MB
+    max-history: 7
   pattern:
     console: "[%date][%-5level][reqId:%X{requestId}][%logger]-> %msg%n"
+    file: "[LHC-ZUUL][%date][%-5level][reqId:%X{requestId}][%logger]-> %msg%n"
+
+---
+spring.profiles: dev
+logging.file.path: E:\dev_log
+eureka-server-ip: 127.0.0.1
+
+---
+spring.profiles: pro
+logging.file.path: /root/lhc/logs
+eureka-server-ip: 172.18.0.2

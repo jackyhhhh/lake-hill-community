@@ -1,0 +1,105 @@
+[msg][2021-05-01 14:25:39,164][INFO ][reqId:][com.hjg.LhcEurekaServerApplication]-> No active profile set, falling back to default profiles: default
+[msg][2021-05-01 14:25:40,136][INFO ][reqId:][org.springframework.cloud.context.scope.GenericScope]-> BeanFactory id=7cdd71bd-0a30-3a36-bd0c-64a79a25d1b7
+[msg][2021-05-01 14:25:40,996][INFO ][reqId:][org.springframework.boot.web.embedded.tomcat.TomcatWebServer]-> Tomcat initialized with port(s): 8000 (http)
+[msg][2021-05-01 14:25:41,012][INFO ][reqId:][org.apache.catalina.core.StandardService]-> Starting service [Tomcat]
+[msg][2021-05-01 14:25:41,012][INFO ][reqId:][org.apache.catalina.core.StandardEngine]-> Starting Servlet engine: [Apache Tomcat/9.0.43]
+[msg][2021-05-01 14:25:41,314][INFO ][reqId:][org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]]-> Initializing Spring embedded WebApplicationContext
+[msg][2021-05-01 14:25:41,315][INFO ][reqId:][org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]-> Root WebApplicationContext: initialization completed in 2136 ms
+[msg][2021-05-01 14:25:41,448][WARN ][reqId:][com.netflix.config.sources.URLConfigurationSource]-> No URLs will be polled as dynamic configuration sources.
+[msg][2021-05-01 14:25:41,448][INFO ][reqId:][com.netflix.config.sources.URLConfigurationSource]-> To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[msg][2021-05-01 14:25:41,466][INFO ][reqId:][com.netflix.config.DynamicPropertyFactory]-> DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@34be065a
+[msg][2021-05-01 14:25:42,060][WARN ][reqId:][org.springframework.boot.actuate.endpoint.EndpointId]-> Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+[msg][2021-05-01 14:25:42,224][INFO ][reqId:][com.sun.jersey.server.impl.application.WebApplicationImpl]-> Initiating Jersey application, version 'Jersey: 1.19.1 03/11/2016 02:08 PM'
+[msg][2021-05-01 14:25:42,337][INFO ][reqId:][com.netflix.discovery.provider.DiscoveryJerseyProvider]-> Using JSON encoding codec LegacyJacksonJson
+[msg][2021-05-01 14:25:42,340][INFO ][reqId:][com.netflix.discovery.provider.DiscoveryJerseyProvider]-> Using JSON decoding codec LegacyJacksonJson
+[msg][2021-05-01 14:25:42,624][INFO ][reqId:][com.netflix.discovery.provider.DiscoveryJerseyProvider]-> Using XML encoding codec XStreamXml
+[msg][2021-05-01 14:25:42,624][INFO ][reqId:][com.netflix.discovery.provider.DiscoveryJerseyProvider]-> Using XML decoding codec XStreamXml
+[msg][2021-05-01 14:25:43,208][WARN ][reqId:][com.netflix.config.sources.URLConfigurationSource]-> No URLs will be polled as dynamic configuration sources.
+[msg][2021-05-01 14:25:43,209][INFO ][reqId:][com.netflix.config.sources.URLConfigurationSource]-> To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[msg][2021-05-01 14:25:43,600][INFO ][reqId:][org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor]-> Initializing ExecutorService 'applicationTaskExecutor'
+[msg][2021-05-01 14:25:45,853][WARN ][reqId:][org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger]-> You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+[msg][2021-05-01 14:25:45,913][INFO ][reqId:][org.springframework.cloud.netflix.eureka.InstanceInfoFactory]-> Setting initial instance status as: STARTING
+[msg][2021-05-01 14:25:45,950][INFO ][reqId:][com.netflix.discovery.DiscoveryClient]-> Initializing Eureka in region us-east-1
+[msg][2021-05-01 14:25:45,950][INFO ][reqId:][com.netflix.discovery.DiscoveryClient]-> Client configured to neither register nor query for data.
+[msg][2021-05-01 14:25:45,964][INFO ][reqId:][com.netflix.discovery.DiscoveryClient]-> Discovery Client initialized at timestamp 1619850345962 with initial instances count: 0
+[msg][2021-05-01 14:25:46,006][INFO ][reqId:][com.netflix.eureka.DefaultEurekaServerContext]-> Initializing ...
+[msg][2021-05-01 14:25:46,008][WARN ][reqId:][com.netflix.eureka.cluster.PeerEurekaNodes]-> The replica size seems to be empty. Check the route 53 DNS Registry
+[msg][2021-05-01 14:25:46,087][INFO ][reqId:][com.netflix.eureka.registry.AbstractInstanceRegistry]-> Finished initializing remote region registries. All known remote regions: []
+[msg][2021-05-01 14:25:46,089][INFO ][reqId:][com.netflix.eureka.DefaultEurekaServerContext]-> Initialized
+[msg][2021-05-01 14:25:46,111][INFO ][reqId:][org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver]-> Exposing 2 endpoint(s) beneath base path '/actuator'
+[msg][2021-05-01 14:25:46,144][INFO ][reqId:][org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry]-> Registering application LHC-EUREKA-SERVER with eureka with status UP
+[msg][2021-05-01 14:25:46,147][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> Setting the eureka configuration..
+[msg][2021-05-01 14:25:46,148][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> Eureka data center value eureka.datacenter is not set, defaulting to default
+[msg][2021-05-01 14:25:46,149][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> Eureka environment value eureka.environment is not set, defaulting to test
+[msg][2021-05-01 14:25:46,164][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> isAws returned false
+[msg][2021-05-01 14:25:46,165][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> Initialized server context
+[msg][2021-05-01 14:25:46,165][INFO ][reqId:][com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl]-> Got 1 instances from neighboring DS node
+[msg][2021-05-01 14:25:46,165][INFO ][reqId:][com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl]-> Renew threshold is: 1
+[msg][2021-05-01 14:25:46,166][INFO ][reqId:][com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl]-> Changing status to UP
+[msg][2021-05-01 14:25:46,181][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerInitializerConfiguration]-> Started Eureka Server
+[msg][2021-05-01 14:25:46,595][WARN ][reqId:][org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext]-> Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8000 is already in use
+[msg][2021-05-01 14:25:46,596][INFO ][reqId:][com.netflix.eureka.DefaultEurekaServerContext]-> Shutting down ...
+[msg][2021-05-01 14:25:46,598][INFO ][reqId:][com.netflix.eureka.DefaultEurekaServerContext]-> Shut down
+[msg][2021-05-01 14:25:46,604][INFO ][reqId:][org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor]-> Shutting down ExecutorService 'applicationTaskExecutor'
+[msg][2021-05-01 14:25:46,608][INFO ][reqId:][com.netflix.discovery.DiscoveryClient]-> Shutting down DiscoveryClient ...
+[msg][2021-05-01 14:25:46,609][INFO ][reqId:][com.netflix.discovery.DiscoveryClient]-> Completed shut down of DiscoveryClient
+[msg][2021-05-01 14:25:46,610][INFO ][reqId:][org.apache.catalina.core.StandardService]-> Stopping service [Tomcat]
+[msg][2021-05-01 14:25:46,637][INFO ][reqId:][org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]-> 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[msg][2021-05-01 14:25:46,641][ERROR][reqId:][org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter]-> 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8000 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8000 or configure this application to listen on another port.
+
+[msg][2021-05-01 14:26:31,307][INFO ][reqId:][com.hjg.LhcEurekaServerApplication]-> No active profile set, falling back to default profiles: default
+[msg][2021-05-01 14:26:32,545][INFO ][reqId:][org.springframework.cloud.context.scope.GenericScope]-> BeanFactory id=7cdd71bd-0a30-3a36-bd0c-64a79a25d1b7
+[msg][2021-05-01 14:26:33,479][INFO ][reqId:][org.springframework.boot.web.embedded.tomcat.TomcatWebServer]-> Tomcat initialized with port(s): 8001 (http)
+[msg][2021-05-01 14:26:33,497][INFO ][reqId:][org.apache.catalina.core.StandardService]-> Starting service [Tomcat]
+[msg][2021-05-01 14:26:33,497][INFO ][reqId:][org.apache.catalina.core.StandardEngine]-> Starting Servlet engine: [Apache Tomcat/9.0.43]
+[msg][2021-05-01 14:26:33,831][INFO ][reqId:][org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]]-> Initializing Spring embedded WebApplicationContext
+[msg][2021-05-01 14:26:33,832][INFO ][reqId:][org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]-> Root WebApplicationContext: initialization completed in 2502 ms
+[msg][2021-05-01 14:26:33,974][WARN ][reqId:][com.netflix.config.sources.URLConfigurationSource]-> No URLs will be polled as dynamic configuration sources.
+[msg][2021-05-01 14:26:33,975][INFO ][reqId:][com.netflix.config.sources.URLConfigurationSource]-> To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[msg][2021-05-01 14:26:33,993][INFO ][reqId:][com.netflix.config.DynamicPropertyFactory]-> DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@6707a4bf
+[msg][2021-05-01 14:26:34,570][WARN ][reqId:][org.springframework.boot.actuate.endpoint.EndpointId]-> Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+[msg][2021-05-01 14:26:34,718][INFO ][reqId:][com.sun.jersey.server.impl.application.WebApplicationImpl]-> Initiating Jersey application, version 'Jersey: 1.19.1 03/11/2016 02:08 PM'
+[msg][2021-05-01 14:26:34,800][INFO ][reqId:][com.netflix.discovery.provider.DiscoveryJerseyProvider]-> Using JSON encoding codec LegacyJacksonJson
+[msg][2021-05-01 14:26:34,802][INFO ][reqId:][com.netflix.discovery.provider.DiscoveryJerseyProvider]-> Using JSON decoding codec LegacyJacksonJson
+[msg][2021-05-01 14:26:35,015][INFO ][reqId:][com.netflix.discovery.provider.DiscoveryJerseyProvider]-> Using XML encoding codec XStreamXml
+[msg][2021-05-01 14:26:35,016][INFO ][reqId:][com.netflix.discovery.provider.DiscoveryJerseyProvider]-> Using XML decoding codec XStreamXml
+[msg][2021-05-01 14:26:35,552][WARN ][reqId:][com.netflix.config.sources.URLConfigurationSource]-> No URLs will be polled as dynamic configuration sources.
+[msg][2021-05-01 14:26:35,552][INFO ][reqId:][com.netflix.config.sources.URLConfigurationSource]-> To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+[msg][2021-05-01 14:26:35,903][INFO ][reqId:][org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor]-> Initializing ExecutorService 'applicationTaskExecutor'
+[msg][2021-05-01 14:26:38,004][WARN ][reqId:][org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger]-> You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+[msg][2021-05-01 14:26:38,058][INFO ][reqId:][org.springframework.cloud.netflix.eureka.InstanceInfoFactory]-> Setting initial instance status as: STARTING
+[msg][2021-05-01 14:26:38,089][INFO ][reqId:][com.netflix.discovery.DiscoveryClient]-> Initializing Eureka in region us-east-1
+[msg][2021-05-01 14:26:38,089][INFO ][reqId:][com.netflix.discovery.DiscoveryClient]-> Client configured to neither register nor query for data.
+[msg][2021-05-01 14:26:38,099][INFO ][reqId:][com.netflix.discovery.DiscoveryClient]-> Discovery Client initialized at timestamp 1619850398098 with initial instances count: 0
+[msg][2021-05-01 14:26:38,144][INFO ][reqId:][com.netflix.eureka.DefaultEurekaServerContext]-> Initializing ...
+[msg][2021-05-01 14:26:38,146][WARN ][reqId:][com.netflix.eureka.cluster.PeerEurekaNodes]-> The replica size seems to be empty. Check the route 53 DNS Registry
+[msg][2021-05-01 14:26:38,205][INFO ][reqId:][com.netflix.eureka.registry.AbstractInstanceRegistry]-> Finished initializing remote region registries. All known remote regions: []
+[msg][2021-05-01 14:26:38,206][INFO ][reqId:][com.netflix.eureka.DefaultEurekaServerContext]-> Initialized
+[msg][2021-05-01 14:26:38,231][INFO ][reqId:][org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver]-> Exposing 2 endpoint(s) beneath base path '/actuator'
+[msg][2021-05-01 14:26:38,267][INFO ][reqId:][org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry]-> Registering application LHC-EUREKA-SERVER with eureka with status UP
+[msg][2021-05-01 14:26:38,270][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> Setting the eureka configuration..
+[msg][2021-05-01 14:26:38,272][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> Eureka data center value eureka.datacenter is not set, defaulting to default
+[msg][2021-05-01 14:26:38,274][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> Eureka environment value eureka.environment is not set, defaulting to test
+[msg][2021-05-01 14:26:38,291][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> isAws returned false
+[msg][2021-05-01 14:26:38,292][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap]-> Initialized server context
+[msg][2021-05-01 14:26:38,292][INFO ][reqId:][com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl]-> Got 1 instances from neighboring DS node
+[msg][2021-05-01 14:26:38,292][INFO ][reqId:][com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl]-> Renew threshold is: 1
+[msg][2021-05-01 14:26:38,293][INFO ][reqId:][com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl]-> Changing status to UP
+[msg][2021-05-01 14:26:38,309][INFO ][reqId:][org.springframework.cloud.netflix.eureka.server.EurekaServerInitializerConfiguration]-> Started Eureka Server
+[msg][2021-05-01 14:26:38,693][INFO ][reqId:][org.springframework.boot.web.embedded.tomcat.TomcatWebServer]-> Tomcat started on port(s): 8001 (http) with context path ''
+[msg][2021-05-01 14:26:38,693][INFO ][reqId:][org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration]-> Updating port to 8001
+[msg][2021-05-01 14:26:39,207][INFO ][reqId:][com.hjg.LhcEurekaServerApplication]-> Started LhcEurekaServerApplication in 10.196 seconds (JVM running for 10.832)
