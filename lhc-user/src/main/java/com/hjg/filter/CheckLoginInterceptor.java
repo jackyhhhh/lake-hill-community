@@ -60,11 +60,15 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(200);
         PrintWriter pw = response.getWriter();
-        String json = JSON.toJSONString(Response.error(401, "ACCESS_DENIED: invalid token !"));
+        Response resp = Response.error(401, "ACCESS_DENIED: invalid token !");
+        if (token == null) {
+            resp.setMsg("ACCESS_DENIED: required token but not found !");
+        }
+        String json = JSON.toJSONString(resp);
         pw.println(json);
         pw.flush();
         pw.close();
-        log.info("token验证不通过, 返回401无权限:ACCESS_DENIED: invalid token !");
+        log.info("token验证不通过, 返回401无权限:{}", resp.getMsg());
         return false;
     }
 
