@@ -1,4 +1,10 @@
-#1.1
+# 1.2
+### Release Note
+  - Bug Fixed
+  - 在application.yml中配置多环境启动(dev和pro)
+  
+
+# 1.1
 #### BugFix :
 
   - 查询消息时, 用户昵称显示乱码问题
