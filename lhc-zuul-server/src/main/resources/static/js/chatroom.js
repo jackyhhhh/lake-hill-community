@@ -69,11 +69,8 @@ function send(){
     }
     // 点击发送后, 输入框清空
     document.getElementById("input_box").value="";
-    var nickname = localStorage.getItem("nickname");
     const url = host + "/msg/saveMsg";
     const params = {
-//        "username": username,
-//        "nickname": nickname,
         "content": content
     }
     postData(url, params).then(res=>{
@@ -92,7 +89,7 @@ function onload(){
     // 刷新消息窗
     refreshMsg();
     // 定时任务int => 定时检测是否有新消息, 有则刷新消息窗口
-    int = self.setInterval("clock()", 500);
+    int = self.setInterval("clock()", 3000);
     // 添加键盘监听事件CTRL+ENTER
     var input_box = document.getElementById("input_box");
     input_box.onkeydown=function(ev){
@@ -125,7 +122,6 @@ function refreshMsg(){
     // 重置窗口消息
     msg_box.innerHTML = "";
 
-    console.log("username:"+username);
     var url = host + "/msg/describeMsgData?pageNum=0&pageSize=50";
     getData(url).then(res=>{
         console.log("describeMsgData:");
@@ -170,6 +166,6 @@ function setRecordData(message, li){
     // 给li标签添加p子标签
     var p = document.createElement("p");
     p.setAttribute("class", "msgcard");
-    p.innerHTML = message.content;
+    p.innerHTML = message.content.replace(/\n/g, "<br>");
     li.appendChild(p);
 }
