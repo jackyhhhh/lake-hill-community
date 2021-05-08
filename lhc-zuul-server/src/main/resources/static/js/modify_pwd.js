@@ -23,8 +23,8 @@ function modifyPassword() {
         const url= host+ "/user/modifyPassword";
         const Data={
             "uid": uid,
-            "oldPwd": oldPwd,
-            "newPwd": newPwd1
+            "oldPwd": md5(oldPwd).substring(0,20),
+            "newPwd": md5(newPwd1).substring(0,20)
         }
         postData(url, Data).then(res=>{
             if(res.result == "SUCCESS"){

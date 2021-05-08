@@ -22,7 +22,7 @@ function login() {
     const url= host+ "/user/login";
     const Data={
         "username": username,
-        "password": password
+        "password": md5(password).substring(0,20)
     }
     postData(url, Data).then(res=>{
         if(res.msg == "OK" && res.result == "SUCCESS"){

@@ -83,7 +83,7 @@ function register() {
     const url= host+ "/user/reg";
     const Data={
         "username": username.value,
-        "password": password.value,
+        "password": md5(password.value).substring(0,20),
         "nickname": nickname.value
     }
     postData(url, Data).then(res=>{

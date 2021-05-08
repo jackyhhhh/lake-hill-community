@@ -8,49 +8,49 @@ import java.util.Map;
 public class ThreadContext {
 
     private static final ThreadLocal<Map<String, Object>> context = new ThreadLocal<>();
-    private static final Map<String, Object> content = new HashMap<>();
+    private static final Map<String, Object> map = new HashMap<>();
     static {
-        context.set(content);
+        context.set(map);
     }
 
     public static void initUser(User user){
-        content.put("user", user);
+        map.put("user", user);
     }
 
     public static User currentUser(){
-        return (User) content.get("user");
+        return (User) map.get("user");
     }
 
     public static void removeUser(){
-        content.remove("user");
+        map.remove("user");
     }
 
     public static void initRequestId(String requestId){
-        content.put("requestId", requestId);
+        map.put("requestId", requestId);
     }
 
     public static String requestId(){
-        return (String) content.get("requestId");
+        return (String) map.get("requestId");
     }
 
     public static void removeRequestId(){
-        content.remove("requestId");
+        map.remove("requestId");
     }
 
     public static void set(String key, Object value){
-        content.put(key, value);
+        map.put(key, value);
     }
 
     public static Object current(String key){
-        return content.get(key);
+        return map.get(key);
     }
 
     public static void remove(String key){
-        content.remove(key);
+        map.remove(key);
     }
 
     public static void removeAll(){
-        content.clear();
+        map.clear();
     }
 
 
