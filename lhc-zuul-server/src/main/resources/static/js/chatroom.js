@@ -161,11 +161,17 @@ function setRecordData(message, li){
     }else {
         i_name.setAttribute("style", "display: block; margin:1px; border-radius: 3 px; font-size:10px; vertical-align: top; color: grey;");
     }
-    i_name.innerHTML = display_name + message.sendTime;
+    i_name.innerHTML = display_name + rTime(message.sendTime);
     li.appendChild(i_name);
     // 给li标签添加p子标签
     var p = document.createElement("p");
     p.setAttribute("class", "msgcard");
     p.innerHTML = message.content.replace(/\n/g, "<br>");
     li.appendChild(p);
+}
+
+function rTime(date) {
+    var d1 = new Date(date).getTime() + 8 * 3600 * 1000;
+    var json_date = new Date(d1).toJSON();
+    return new Date(json_date).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
 }
