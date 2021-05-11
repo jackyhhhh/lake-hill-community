@@ -61,7 +61,7 @@ logging:
 
 ---
 spring.profiles: dev
-logging.file.path: E:\dev_log
+logging.file.name: E:\dev_log\${spring.application.name}.log
 eureka-server-ip: 127.0.0.1
 db:
   ip: 127.0.0.1
@@ -71,7 +71,7 @@ db:
 
 ---
 spring.profiles: pro
-logging.file.path: /root/lhc/logs
+logging.file.name: /root/lhc/logs/${spring.application.name}.log
 eureka-server-ip: 172.18.0.2
 db:
   ip: 172.17.0.16
